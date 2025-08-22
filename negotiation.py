@@ -2,7 +2,7 @@ import random
 import ollama  # Make sure ollama is installed and running
 
 class NegotiationAI:
-    def __init__(self, product, seller_price, buyer_price, max_rounds=10):
+    def _init_(self, product, seller_price, buyer_price, max_rounds=10):
         self.product = product
         self.seller_price = seller_price
         self.buyer_price = buyer_price
@@ -23,7 +23,7 @@ class NegotiationAI:
             response = ollama.chat(model="llama3", messages=[{"role": "user", "content": prompt}])
             return response["message"]["content"].strip()
         except Exception as e:
-            return f"(⚠️ Fallback) {role} says: Let's discuss more."
+            return f"(⚠ Fallback) {role} says: Let's discuss more."
 
     def smart_negotiation(self):
         print(f"\n🛒 Negotiation starts for: {self.product}\n")
@@ -37,7 +37,7 @@ class NegotiationAI:
 
             # Buyer message from Ollama
             buyer_msg = self.get_chat_response("buyer", buyer_offer, "Wants lowest possible price")
-            print(f"Buyer: {buyer_msg} | Offer: ₹{buyer_offer}")
+            print(f"Buyer: {buyer_msg} | Offer: ₹{buyer_offer}\n")
 
             if buyer_offer >= seller_offer:
                 print(f"✅ Deal closed at ₹{buyer_offer} 🎉\n")
